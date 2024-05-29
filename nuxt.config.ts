@@ -3,8 +3,8 @@
 const temaCustomizado = {
   dark: true,
   colors: {
-    background: '#660000',
-    surface: '#FFFFFF',
+    background: '#FFFFFF',
+    toolbar: '#F7F7F7',
     primary: '#6200EE',
     'primary-darken-1': '#3700B3',
     secondary: '#03DAC6',
