@@ -17,14 +17,14 @@ const temaCustomizado = {
 };
 
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   modules: ["vuetify-nuxt-module", '@nuxt/eslint'],
   plugins: ['~/plugins/axios.js'],
   vuetify: {
     /* vuetify options */
     vuetifyOptions: {
       theme: {
-        defaultTheme: 'dark',
+        defaultTheme: 'light',
         themes: {
           temaCustomizado,
         },
@@ -33,13 +33,10 @@ export default defineNuxtConfig({
 
     moduleOptions: {
       /* nuxt-vuetify module options */
-      treeshaking: true || false,
-      useIconCDN: true || false,
+      treeshaking: true,
 
       /* vite-plugin-vuetify options */
-      styles: true || 'none' || 'expose' || 'sass' || { configFile: String },
-      autoImport: true || false,
-      useVuetifyLabs: true || false,
+      autoImport: true ,
     },
   },
 })

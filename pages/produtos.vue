@@ -21,31 +21,27 @@
     
     <v-btn 
     size="small"
-      variant="plain">
-        New in
+      variant="plain"
+      class="text-none">
+        Produtos
       </v-btn>
 
       <v-btn 
       size="small"
       variant="plain"
-      class="text-none">
-        Sporty
+      class="text-none"
+      @click="mudaCaregorias">
+        Categorias
       </v-btn>
 
       <v-btn 
       size="small"
       variant="plain"
-      class="text-none">
-        Acessórios
+      class="text-none"
+      @click="mudaCupoms">
+        Cupoms
       </v-btn>
 
-      <v-btn 
-      size="small"
-      variant="plain"
-      class="text-none">
-        Moletons La's Club
-      </v-btn>
-      
       <v-spacer></v-spacer>
       
       <v-btn 
@@ -69,6 +65,7 @@
       </v-toolbar>
     </v-card>
   </template>
+  
   <template>
     <v-app>
       <v-container>
@@ -176,13 +173,13 @@
                     label="Nome"
                     placeholder="name"
                     v-model="product.name">
-                  </v-text-field>
-                </v-col>
-                <v-col>
-                  <v-text-field
-                  variant="outlined"
-                  label="Preço"
-                  placeholder="price"
+                    </v-text-field>
+                  </v-col>
+                  <v-col>
+                    <v-text-field
+                    variant="outlined"
+                    label="Preço"
+                    placeholder="price"
                     v-model="product.price">
                     </v-text-field>
                   </v-col>
@@ -196,6 +193,31 @@
                     v-model="product.description">
                     </v-text-field>
                   </v-col>
+                  <v-col>
+                    <v-autocomplete
+                      :items="categories"
+                      item-title="name"
+                      item-value="id"
+                      v-model="product.idCategory"
+                    >
+                    </v-autocomplete>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col>
+                    <v-text-field
+                    variant="outlined"
+                    label="Link Imagem"
+                    placeholder="image"
+                    v-model="product.image">
+                    </v-text-field>
+                  </v-col>
+                  <v-col>
+                    <img
+                    :src="product.image"
+                    style="max-width: 150px; max-height: 150px"
+                    >
+                </v-col>
                 </v-row>
               </v-card-text>
               <v-card-actions>
@@ -308,8 +330,12 @@
         await this.getItems();  
       },
       
-      mudaPagina(){
-        this.$router.push({ path: '/variaveis' });
+      mudaCaregorias(){
+          this.$router.push({ path: '/categorias' });
+        },
+
+      mudaCupoms(){
+        this.$router.push({ path: '/cupoms' });
       },
       
       async getItems() {
