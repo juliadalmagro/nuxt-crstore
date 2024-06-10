@@ -11,43 +11,36 @@
       density="compact"
       color="toolbar"
       style="" >
-      
-      <v-btn
-      size="small" 
-      variant="plain"
-      class="text-none">
-      
-    </v-btn>
-    
-    <v-btn 
-    size="small"
-      variant="plain"
-      class="text-none">
-        Produtos
-      </v-btn>
-
-      <v-btn 
-      size="small"
-      variant="plain"
-      class="text-none"
-      @click="mudaCaregorias">
-        Categorias
-      </v-btn>
-
-      <v-btn 
-      size="small"
-      variant="plain"
-      class="text-none"
-      @click="mudaCupoms">
-        Cupoms
-      </v-btn>
-
-      <v-spacer></v-spacer>
-      
-      <v-btn 
+        
+        <v-btn 
         size="small"
         variant="plain"
-        class="text-none" >
+        class="text-none">
+          Produtos
+        </v-btn>
+
+        <v-btn 
+        size="small"
+        variant="plain"
+        class="text-none"
+        @click="mudaCaregorias">
+          Categorias
+        </v-btn>
+
+        <v-btn 
+        size="small"
+        variant="plain"
+        class="text-none"
+        @click="mudaCupoms">
+          Cupoms
+        </v-btn>
+
+        <v-spacer></v-spacer>
+        
+        <v-btn 
+          size="small"
+          variant="plain"
+          class="text-none" >
           Feito no Brasil
         </v-btn>
 

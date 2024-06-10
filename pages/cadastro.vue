@@ -102,9 +102,13 @@
       </v-toolbar>
     </v-card>
   </template>
+
+  <div class="text">  
+    <p>CONECTE-SE AQUI!</p>
+  </div>
      
   <body style="background-color: #eeeceb;">
-    <v-container style="margin-top: 90px;" >
+    <v-container style="margin-top: 20px; position: absolute; left: 8.5%;" >
       <v-row
         justify="center" >
         <v-col
@@ -279,7 +283,8 @@
                     color="black"
                     class="text-none"
                     block
-                    border>
+                    border
+                    @click="cadastrar()">
                     CADASTRAR
                   </v-btn>
                 </v-col>
@@ -294,132 +299,141 @@
     </v-container>
   </body>  
 </template>
+
+<script>
+  export default {
+    data: () => {
+      return {
+        items: [],
+        role: ['Administrador', 'Usuário'],
+        show: true,
+        user: {
+          name: null,
+          username: null,
+          phone: null,
+          email: null,
+          cpf: null,
+          password: null,
+          role: null,
+        },
+        adress: {
+          zipCode: null,
+          state: null,
+          city: null,
+          street: null,
+          district: null,
+          numberForget: null,
+          idUser: null,
+        },
+      }
+    },
     
-    <script>
-    export default {
-      data: () => {
-        return {
-          items: [],
-          role: ['Administrador', 'Usuário'],
-          show: true,
-          user: {
-            name: null,
+    async created() {
+      await this.getUser();
+      await this.getAdress();
+    },
+  
+    methods: {
+
+      resetUser(){
+        this.user = {
+          name: null,
             username: null,
             phone: null,
             email: null,
             cpf: null,
             password: null,
             role: null,
-          },
-          adress: {
-            zipCode: null,
-            state: null,
-            city: null,
-            street: null,
-            district: null,
-            numberForget: null,
-            idUser: null,
-          }
         }
       },
+
+      resetAdress(){
+        this.adress = {
+          zipCode: null,
+          state: null,
+          city: null,
+          street: null,
+          district: null,
+          numberForget: null,
+          idUser: null,
+        }
+      },
+
+      async getUser() {
+      const response = await this.$api.get('/user');
+      this.items = response.data;
+      },
       
-      async created() {
+      async createUser() {
+        const response = await this.$api.post('/user/persist', this.user);
+        this.resetUser();
         await this.getUser();
+      },
+      
+      async getAdress() {
+      const response = await this.$api.get('/adress');
+      this.items = response.data;
+      },
+      
+      async createAdress() {
+        const response = await this.$api.post('/adress/persist', this.adress);
+        this.resetAdress();
         await this.getAdress();
       },
+
+      async cadastrar() {
+        await this.createAdress();
+        await this.createUser();
+      },
+
+      mudaIndex(){
+        this.$router.push({ path: '/' });
+      },
+
+      mudaBlusas(){
+        this.$router.push({ path: '/blusas' });
+      },
+
+      mudaCalcas(){
+        this.$router.push({ path: '/calcas' });
+      },
+
+      mudaShorts(){
+        this.$router.push({ path: '/shorts' });
+      },
+      
+      mudaTerceiras(){
+        this.$router.push({ path: '/terceiras' });
+      },
+
+      mudaAcessorios(){
+        this.$router.push({ path: '/acessorios' });
+      },
+      tomaShow(){
+        this.show = !this.show
+      },
+    }
+  }
+</script>
     
-      methods: {
+<style>
+  p {
+    font-size: 18px;
+    color: #636260;
+  }
 
-        resetUser(){
-          this.user = {
-            name: null,
-              username: null,
-              phone: null,
-              email: null,
-              cpf: null,
-              password: null,
-              role: null,
-          }
-        },
+  .text{
+    align-items: center;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    left: 5%;
+    margin: auto;
+    right: 5%;
+    text-align: center;
+    top: 0;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
 
-        resetAdress(){
-          this.adress = {
-            zipCode: null,
-            state: null,
-            city: null,
-            street: null,
-            district: null,
-            numberForget: null,
-            idUser: null,
-          }
-        },
-  
-        async getUser() {
-        const response = await this.$api.get('/user');
-        this.items = response.data;
-        },
-        
-        async createItem() {
-          const response = await this.$api.post('/user/persist', this.user);
-          this.resetUser();
-          await this.getUser();
-        },
-        
-        async getAdress() {
-        const response = await this.$api.get('/adress');
-        this.items = response.data;
-        },
-        
-        async createAdress() {
-          const response = await this.$api.post('/adress/persist', this.adress);
-          this.resetAdress();
-          await this.getIAdress();
-        },
-  
-
-        mudaIndex(){
-          this.$router.push({ path: '/' });
-        },
-        mudaBlusas(){
-          this.$router.push({ path: '/blusas' });
-        },
-        mudaCalcas(){
-          this.$router.push({ path: '/calcas' });
-        },
-        mudaShorts(){
-          this.$router.push({ path: '/shorts' });
-        },
-        mudaTerceiras(){
-          this.$router.push({ path: '/terceiras' });
-        },
-        mudaAcessorios(){
-          this.$router.push({ path: '/acessorios' });
-        },
-        tomaShow(){
-          this.show = !this.show
-        },
-      }
-    }
-    </script>
-    
-    <style>
-    p {
-      font-size: 18px;
-      color: #636260;
-    }
-  
-    .text{
-      align-items: center;
-      bottom: 0;
-      display: flex;
-      justify-content: center;
-      left: 5%;
-      margin: auto;
-      right: 5%;
-      text-align: center;
-      top: 0;
-      margin-top: 80px;
-      margin-bottom: 20px;
-    }
-  
-    </style>
+</style>

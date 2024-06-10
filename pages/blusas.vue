@@ -47,6 +47,7 @@
           variant="plain"
           class="text-none"
           height="0%"
+          @click="mudaTerceiras()"
         >
           Terceiras peças
         </v-btn>
@@ -56,6 +57,7 @@
           variant="plain"
           class="text-none"
           height="0%"
+          @click="mudaAcessorios()"
         >
           Acessórios
         </v-btn>
@@ -90,6 +92,7 @@
         <v-btn 
           variant="plain"
           height="0%"
+          @click="mudaLogin()"
         >
           <v-icon>mdi-account-outline</v-icon>
         </v-btn>
@@ -189,6 +192,9 @@
       },
       mudaAcessorios(){
         this.$router.push({ path: '/acessorios' });
+      },
+      mudaLogin(){
+          this.$router.push({ path: '/login' });
       },
     }
   }

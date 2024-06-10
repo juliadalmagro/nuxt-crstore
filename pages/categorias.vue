@@ -11,64 +11,50 @@
         density="compact"
         color="toolbar"
         style="" >
-        
-        <v-btn
-        size="small" 
-        variant="plain"
-        class="text-none">
-        
-      </v-btn>
       
-      <v-btn 
-      size="small"
-        variant="plain"
-        class="text-none"
-        @click="mudaProdutos()">
-          Produtos
-        </v-btn>
-  
-        <v-btn 
-        size="small"
-        variant="plain"
-        class="text-none">
-          Categorias
-        </v-btn>
-  
-        <v-btn 
-        size="small"
-        variant="plain"
-        class="text-none"
-        @click="mudaCupoms()">
-          Cupoms
-        </v-btn>
-  
-        <!-- <v-btn 
-        size="small"
-        variant="plain"
-        class="text-none">
-          Moletons La's Club
-        </v-btn> -->
-        
-        <v-spacer></v-spacer>
-        
-        <v-btn 
+          <v-btn 
           size="small"
           variant="plain"
-          class="text-none" >
-            Feito no Brasil
+          class="text-none"
+          @click="mudaProdutos()">
+            Produtos
           </v-btn>
-  
-          <v-btn variant="plain">
-            <v-icon>mdi-magnify</v-icon>
+    
+          <v-btn 
+          size="small"
+          variant="plain"
+          class="text-none">
+            Categorias
           </v-btn>
-  
-          <v-btn variant="plain">
-            <v-icon>mdi-account-outline</v-icon>
+    
+          <v-btn 
+          size="small"
+          variant="plain"
+          class="text-none"
+          @click="mudaCupoms()">
+            Cupoms
           </v-btn>
-  
-          <v-btn variant="plain">
-            <v-icon>mdi-shopping-outline</v-icon>
-          </v-btn>
+          
+          <v-spacer></v-spacer>
+          
+          <v-btn 
+            size="small"
+            variant="plain"
+            class="text-none" >
+              Feito no Brasil
+            </v-btn>
+    
+            <v-btn variant="plain">
+              <v-icon>mdi-magnify</v-icon>
+            </v-btn>
+    
+            <v-btn variant="plain">
+              <v-icon>mdi-account-outline</v-icon>
+            </v-btn>
+    
+            <v-btn variant="plain">
+              <v-icon>mdi-shopping-outline</v-icon>
+            </v-btn>
         </v-toolbar>
       </v-card>
     </template>

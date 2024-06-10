@@ -18,6 +18,7 @@
             variant="plain"
             class="text-none"
             height="0%"
+            @click="mudaBlusas()"
           >
             Blusas & tops
           </v-btn>
@@ -27,6 +28,7 @@
             variant="plain"
             height="0%"
             class="text-none"
+            @click="mudaCalcas()"
           >
             Calças
           </v-btn>
@@ -36,6 +38,7 @@
             variant="plain"
             class="text-none"
             height="0%"
+            @click="mudaShorts()"
           >
             Shorts & saias
           </v-btn>
@@ -45,6 +48,7 @@
             variant="plain"
             class="text-none"
             height="0%"
+            @click="mudaTerceiras()"
           >
             Terceiras peças
           </v-btn>
@@ -54,6 +58,7 @@
             variant="plain"
             class="text-none"
             height="0%"
+            @click="mudaAcessorios()"
           >
             Acessórios
           </v-btn>
@@ -102,95 +107,54 @@
         </v-toolbar>
       </v-card>
     </template>
+      <div class="text">  
+        <p>ACESSÓRIOS</p>
+      </div>
       <body style="background-color: #eeeceb;">
-        <v-container style="margin-top: 90px;" >
-          <v-row
-            justify="center" >
+        <v-container>
+          <v-row 
+            justify="center"
+          >
             <v-col
+              v-for="(dado, i) in items"
+              :key="i"
               cols="12"
-              md="6"
-              >
+              md="3"
+            >
               <v-card
-            height="400"
-            width="500"
-            theme="light">
-            <v-card-title>
-                JÁ SOU CLIENTE
-              </v-card-title>
-              <v-card-text>
-                <v-row>
-                  <v-col>
-                    <span>Nome de Usuário:</span>
-                    <v-text-field
-                    variant="outlined"
-                    >
-                    </v-text-field>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col>
-                    <span>Digite a sua senha:</span>
-                    <v-text-field
-                    variant="outlined"
-                    :append-icon="show ? 'mdi-eye-off' : 'mdi-eye'"
-                    :type="show ? 'text' : 'password'"
-                    @click:append="tomaShow"
-                    >
-                    </v-text-field>
-                    <a href="" style="color: grey;">Esqueci minha senha</a>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col>
-                    <v-btn
-                    color="black"
-                    class="text-none"
-                    block
-                    border>
-                    <v-icon> mdi-lock-outline</v-icon>Entrar
-                    </v-btn>
-                  </v-col>
-                </v-row>
-              </v-card-text>
-            </v-card>
-            </v-col>
-            <v-col
+                class="mx-auto"
+                max-width="344"
               >
-              <v-card
-            height="200"
-            width="500"
-            theme="light">
-            <v-card-title>
-                CRIAR CONTA
-              </v-card-title>
-              <v-card-text>
-                <v-row>
-                  <v-col>
-                    <span>Acesse o formulário de cadastro:</span>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col>
-                    <v-btn
-                    color="black"
-                    class="text-none"
+                <v-img
+                  height="400px"
+                  :src="dado.image"
+                  cover
+                ></v-img>
+  
+                <v-card-subtitle>
+                  {{ dado.name }}
+                </v-card-subtitle>
+  
+                <v-card-subtitle>
+                  R$ {{ dado.price }}
+                </v-card-subtitle>
+  
+                <v-card-actions>
+                  <v-btn
+                    color="#636260"
+                    text="Comprar"
                     block
                     border
-                    @click="mudaCadastro()">
-                    CADASTRAR
-                    </v-btn>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col>
-                    <span>Primeira compra? Cadastre-se agora e receba um cupom de 10% OFF</span>
-                  </v-col>
-                </v-row>
-              </v-card-text>
-            </v-card>
+                  ></v-btn>
+  
+                  <v-spacer></v-spacer>
+  
+                </v-card-actions>
+  
+              </v-card>
             </v-col>
           </v-row>
-        </v-container>
+        </v-container>    
       </body>  
   </template>
     
@@ -199,7 +163,7 @@
       data: () => {
         return {
           items: [],
-          show: true,
+          show: false,
         }
       },
       
@@ -210,30 +174,30 @@
       methods: {
   
         async getProdutos() {
-            const response = await this.$api.get('/product/blusas');
+            const response = await this.$api.get(`/product/por-categoria/5`);
             this.items = response.data;
           },
   
         mudaIndex(){
           this.$router.push({ path: '/' });
         },
-        mudaCalcas(){
-          this.$router.push({ path: '/calcas' });
+        mudaBlusas(){
+          this.$router.push({ path: '/blusas' });
         },
         mudaShorts(){
           this.$router.push({ path: '/shorts' });
         },
+        mudaCalcas(){
+          this.$router.push({ path: '/calcas' });
+        },
         mudaTerceiras(){
-          this.$router.push({ path: '/terceiras' });
+          this.$router.push({ path: '/terceirasPecas' });
         },
         mudaAcessorios(){
           this.$router.push({ path: '/acessorios' });
         },
-        mudaCadastro(){
-          this.$router.push({ path: '/cadastro' });
-        },
-        tomaShow(){
-          this.show = !this.show
+        mudaLogin(){
+          this.$router.push({ path: '/login' });
         },
       }
     }
@@ -241,7 +205,7 @@
     
     <style>
     p {
-      font-size: 18px;
+      font-size: 16px;
       color: #636260;
     }
   
@@ -255,7 +219,7 @@
       right: 5%;
       text-align: center;
       top: 0;
-      margin-top: 80px;
+      margin-top: 20px;
       margin-bottom: 20px;
     }
   

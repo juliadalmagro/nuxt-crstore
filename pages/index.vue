@@ -27,6 +27,7 @@
           variant="plain"
           height="0%"
           class="text-none"
+          @click="mudaCalcas()"
           >
           Calças
         </v-btn>
@@ -35,7 +36,8 @@
           size="small"
           variant="plain"
           class="text-none"
-          height="0%">
+          height="0%"
+          @click="mudaShorts()">
           Shorts & saias
         </v-btn>
 
@@ -43,7 +45,8 @@
           size="small"
           variant="plain"
           class="text-none"
-          height="0%">
+          height="0%"
+          @click="mudaTerceiras()">
           Terceiras peças
         </v-btn>
 
@@ -51,7 +54,8 @@
           size="small"
           variant="plain"
           class="text-none"
-          height="0%">
+          height="0%"
+          @click="mudaAcessorios()">
         Acessórios
         </v-btn>
 
@@ -82,7 +86,7 @@
       <v-btn 
       variant="plain"
       height="0%"
-      @click="mudaLogin">
+      @click="mudaLogin()">
         <v-icon>mdi-account-outline</v-icon>
       </v-btn>
       
@@ -114,18 +118,17 @@
   ></v-carousel-item>
 </v-carousel>
   </div>
-  <div style="position: relative; border-bottom: 1px solid black; height: 65px;" >
-    <div style="color: #636260; width: 80%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)">
+  <div style="position: relative; border-bottom: 1px solid black; height: 65px; display: flex; flex-direction: row" >
+    <div style="color: #636260; width: 80%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
       <v-row>
         <v-col>
-          <span></span>
-          <p> <img src="https://cdn.vnda.com.br/lasclothing/2024/04/09/11_4_7_700_IMG_7330.PNG?v=1712671674" style="height: 31.7167px; width: 31.7167px;"> FRETE GRÁTIS A PARTIR DE R$450,00 EM COMPRAS. </p>
+          <p style="position: absolute; top: -40%;"> <img src="https://cdn.vnda.com.br/lasclothing/2024/04/09/11_4_7_700_IMG_7330.PNG?v=1712671674" class="img-ursinho"> FRETE GRÁTIS A PARTIR DE R$450,00 EM COMPRAS.</p>
         </v-col>
         <v-col>
-          <p> <img src="https://cdn.vnda.com.br/lasclothing/2024/04/09/11_4_7_700_IMG_7330.PNG?v=1712671674" style="height: 31.7167px; width: 31.7167px;"> PRIMEIRA TROCA POR CONTA DA LA'S. </p>
+          <p> <img src="https://cdn.vnda.com.br/lasclothing/2024/04/09/11_4_7_700_IMG_7330.PNG?v=1712671674" class="img-ursinho"> PRIMEIRA TROCA POR CONTA DA LA'S.</p>
         </v-col>
         <v-col>
-          <p> <img src="https://cdn.vnda.com.br/lasclothing/2024/04/09/11_4_7_700_IMG_7330.PNG?v=1712671674" style="height: 31.7167px; width: 31.7167px;"> ENTREGAMOS PARA TODO O BRASIL.</p>
+          <p> <img src="https://cdn.vnda.com.br/lasclothing/2024/04/09/11_4_7_700_IMG_7330.PNG?v=1712671674" class="img-ursinho"  > ENTREGAMOS PARA TODO O BRASIL.</p>
         </v-col>
       </v-row>
     </div>
@@ -167,4 +170,11 @@ export default {
 p {
   font-size: 12px;
 }
+
+.img-ursinho {
+  height: 35px; 
+  width: 35px; 
+  margin-top: 10px;
+}
+
 </style>

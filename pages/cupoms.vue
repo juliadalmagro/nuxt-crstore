@@ -11,50 +11,36 @@
         density="compact"
         color="toolbar"
         style="" >
-        
-        <v-btn
-        size="small" 
-        variant="plain"
-        class="text-none">
-        
-      </v-btn>
       
-      <v-btn 
-      size="small"
-        variant="plain"
-        class="text-none"
-        @click="mudaProdutos()">
-          Produtos
-        </v-btn>
-  
-        <v-btn 
-        size="small"
-        variant="plain"
-        class="text-none"
-        @click="mudaCategorias()">
-          Categorias
-        </v-btn>
-  
-        <v-btn 
-        size="small"
-        variant="plain"
-        class="text-none">
-          Cupoms
-        </v-btn>
-  
-        <!-- <v-btn 
-        size="small"
-        variant="plain"
-        class="text-none">
-          Moletons La's Club
-        </v-btn> -->
-        
-        <v-spacer></v-spacer>
-        
-        <v-btn 
+          <v-btn 
           size="small"
           variant="plain"
-          class="text-none" >
+          class="text-none"
+          @click="mudaProdutos()">
+            Produtos
+          </v-btn>
+    
+          <v-btn 
+          size="small"
+          variant="plain"
+          class="text-none"
+          @click="mudaCategorias()">
+            Categorias
+          </v-btn>
+    
+          <v-btn 
+          size="small"
+          variant="plain"
+          class="text-none">
+            Cupoms
+          </v-btn>
+  
+          <v-spacer></v-spacer>
+          
+          <v-btn 
+            size="small"
+            variant="plain"
+            class="text-none" >
             Feito no Brasil
           </v-btn>
   
