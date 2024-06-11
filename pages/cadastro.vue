@@ -115,7 +115,7 @@
           cols="12"
           md="6">
           <v-card
-            height="400"
+            height="600"
             width="700"
             theme="light">
             <v-card-title>
@@ -128,6 +128,7 @@
                   <v-text-field
                     variant="outlined"
                     v-model="user.name"
+                    :rules="rules" 
                   >
                   </v-text-field>
                 </v-col>
@@ -136,6 +137,7 @@
                   <v-text-field
                     variant="outlined"
                     v-model="user.username"
+                    :rules="rules" 
                   >
                   </v-text-field>
                 </v-col>
@@ -146,6 +148,7 @@
                   <v-text-field
                     variant="outlined"
                     v-model="user.phone"
+                    :rules="rules" 
                   >
                   </v-text-field>
                 </v-col>
@@ -154,6 +157,7 @@
                   <v-text-field
                     variant="outlined"
                     v-model="user.email"
+                    :rules="rules" 
                   >
                   </v-text-field>
                 </v-col>
@@ -164,19 +168,45 @@
                   <v-text-field
                     variant="outlined"
                     v-model="user.cpf"
+                    :rules="rules" 
                   >
                   </v-text-field>
                 </v-col>
                 <v-col>
                   <span>Função:</span>
                   <v-autocomplete
+                    v-model="user.role" 
                     :items="role"
-                    item-title="name"
-                    item-value="id"
-                    v-model="user.role"
                     placeholder="Selecione"
+                    :rules="rules" 
                   >
                   </v-autocomplete>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <span>Digite a sua senha:</span>
+                  <v-text-field
+                    variant="outlined"  
+                    v-model="user.passwordHash"
+                    :append-icon="show ? 'mdi-eye-off' : 'mdi-eye'"
+                    :type="show ? 'text' : 'password'"
+                    @click:append="tomaShow"
+                    :rules="rules" 
+                  >
+                  </v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-btn
+                    color="black"
+                    class="text-none"
+                    block
+                    border
+                    @click="createUser()">
+                    CADASTRAR
+                  </v-btn>
                 </v-col>
               </v-row>
             </v-card-text>
@@ -190,7 +220,7 @@
           cols="12"
           md="6">
           <v-card
-            height="450"
+            height="500"
             width="700"
             theme="light">
             <v-card-title>
@@ -203,76 +233,57 @@
                   <v-text-field
                     variant="outlined"
                     v-model="adress.zipCode"
+                    :rules="rules" 
                   >
                   </v-text-field>
                   <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank" style="color: grey;">Consulte seu CEP</a>
                 </v-col>
                 <v-col>
-                  <span>Estado:</span>
+                  <span>País:</span>
                   <v-text-field
                     variant="outlined"
-                    v-model="adress.state"
+                    v-model="adress.district"
+                    :rules="rules" 
                   >
                   </v-text-field>
                 </v-col>
               </v-row>
               <v-row>
+                <v-col>
+                  <span>Estado:</span>
+                  <v-text-field
+                    variant="outlined"
+                    v-model="adress.state"
+                    :rules="rules" 
+                  >
+                  </v-text-field>
+                </v-col>
                 <v-col>
                   <span>Cidade:</span>
                   <v-text-field
                     variant="outlined"
                     v-model="adress.city"
+                    :rules="rules" 
                   >
                   </v-text-field>
                 </v-col>
+              </v-row>
+              <v-row>
                 <v-col>
                   <span>Rua:</span>
                   <v-text-field
                     variant="outlined"
                     v-model="adress.street"
+                    :rules="rules" 
                   >
                   </v-text-field>
                 </v-col>
-              </v-row>
-              <v-row>
                 <v-col>
                   <span>Número:</span>
                   <v-text-field
                     variant="outlined"
                     v-model="adress.numberForget"
-                  >
-                  </v-text-field>
-                </v-col>
-                <v-col>
-
-                </v-col>
-              </v-row>
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row>
-      <v-row
-        justify="center">
-        <v-col
-          cols="12"
-          md="6">
-          <v-card
-            height="250"
-            width="700"
-            theme="light">
-            <v-card-title>
-              CADASTRAR SENHA
-            </v-card-title>
-            <v-card-text>
-              <v-row>
-                <v-col>
-                  <span>Digite a sua senha:</span>
-                  <v-text-field
-                    variant="outlined"  
-                    v-model="user.password"
-                    :append-icon="show ? 'mdi-eye-off' : 'mdi-eye'"
-                    :type="show ? 'text' : 'password'"
-                    @click:append="tomaShow"
+                    :rules="rules" 
                   >
                   </v-text-field>
                 </v-col>
@@ -284,13 +295,10 @@
                     class="text-none"
                     block
                     border
-                    @click="cadastrar()">
-                    CADASTRAR
+                    @click="createAdress()">
+                    CADASTRAR ENDEREÇO
                   </v-btn>
                 </v-col>
-              </v-row>
-              <v-row>
-               
               </v-row>
             </v-card-text>
           </v-card>
@@ -313,7 +321,7 @@
           phone: null,
           email: null,
           cpf: null,
-          password: null,
+          passwordHash: null,
           role: null,
         },
         adress: {
@@ -325,6 +333,13 @@
           numberForget: null,
           idUser: null,
         },
+        rules: [
+          value => {
+            if (value) return true
+
+            return 'Preencha este campo!'
+          },
+    ],
       }
     },
     
@@ -342,7 +357,7 @@
             phone: null,
             email: null,
             cpf: null,
-            password: null,
+            passwordHash: null,
             role: null,
         }
       },
@@ -366,7 +381,7 @@
       
       async createUser() {
         const response = await this.$api.post('/user/persist', this.user);
-        this.resetUser();
+  
         await this.getUser();
       },
       
@@ -379,11 +394,6 @@
         const response = await this.$api.post('/adress/persist', this.adress);
         this.resetAdress();
         await this.getAdress();
-      },
-
-      async cadastrar() {
-        await this.createAdress();
-        await this.createUser();
       },
 
       mudaIndex(){

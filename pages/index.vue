@@ -62,7 +62,7 @@
         <v-btn 
         size="small"
         variant="plain"
-        style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)"
+        style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"
       >
         <img src="https://cdn.vnda.com.br/lasclothing/2024/03/08/10_3_9_926_logolasclothing.svg?v=1709905121" style="height: 36.25px; width: 66.15px;">
       </v-btn>
@@ -122,7 +122,7 @@
     <div style="color: #636260; width: 80%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
       <v-row>
         <v-col>
-          <p style="position: absolute; top: -40%;"> <img src="https://cdn.vnda.com.br/lasclothing/2024/04/09/11_4_7_700_IMG_7330.PNG?v=1712671674" class="img-ursinho"> FRETE GRÁTIS A PARTIR DE R$450,00 EM COMPRAS.</p>
+          <p> <img src="https://cdn.vnda.com.br/lasclothing/2024/04/09/11_4_7_700_IMG_7330.PNG?v=1712671674" class="img-ursinho"> FRETE GRÁTIS A PARTIR DE R$450,00 EM COMPRAS.</p>
         </v-col>
         <v-col>
           <p> <img src="https://cdn.vnda.com.br/lasclothing/2024/04/09/11_4_7_700_IMG_7330.PNG?v=1712671674" class="img-ursinho"> PRIMEIRA TROCA POR CONTA DA LA'S.</p>
