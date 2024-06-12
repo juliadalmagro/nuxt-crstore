@@ -148,6 +148,7 @@
                   <v-text-field
                     variant="outlined"
                     v-model="user.phone"
+                    v-mask="['## (##) #####-####']" 
                     :rules="rules" 
                   >
                   </v-text-field>
@@ -168,6 +169,7 @@
                   <v-text-field
                     variant="outlined"
                     v-model="user.cpf"
+                    v-mask="['###.###.###-##']" 
                     :rules="rules" 
                   >
                   </v-text-field>
@@ -188,9 +190,9 @@
                   <span>Digite a sua senha:</span>
                   <v-text-field
                     variant="outlined"  
-                    v-model="user.passwordHash"
-                    :append-icon="show ? 'mdi-eye-off' : 'mdi-eye'"
-                    :type="show ? 'text' : 'password'"
+                    v-model="user.password"
+                    :append-icon="show ? 'mdi-eye' :'mdi-eye-off'"
+                    :type="show ? 'password' : 'text'"
                     @click:append="tomaShow"
                     :rules="rules" 
                   >
@@ -204,7 +206,7 @@
                     class="text-none"
                     block
                     border
-                    @click="createUser()">
+                    @click="registerUser()">
                     CADASTRAR
                   </v-btn>
                 </v-col>
@@ -215,7 +217,7 @@
       </v-row>
           
       <v-row
-        justify="center">
+        justify="center"> 
         <v-col
           cols="12"
           md="6">
@@ -309,7 +311,9 @@
 </template>
 
 <script>
+import {mask} from 'vue-the-mask'
   export default {
+    directives: {mask},
     data: () => {
       return {
         items: [],
@@ -321,7 +325,7 @@
           phone: null,
           email: null,
           cpf: null,
-          passwordHash: null,
+          password: null,
           role: null,
         },
         adress: {
@@ -339,12 +343,11 @@
 
             return 'Preencha este campo!'
           },
-    ],
+        ],
       }
     },
     
     async created() {
-      await this.getUser();
       await this.getAdress();
     },
   
@@ -357,7 +360,7 @@
             phone: null,
             email: null,
             cpf: null,
-            passwordHash: null,
+            password: null,
             role: null,
         }
       },
@@ -373,16 +376,10 @@
           idUser: null,
         }
       },
-
-      async getUser() {
-      const response = await this.$api.get('/user');
-      this.items = response.data;
-      },
       
-      async createUser() {
-        const response = await this.$api.post('/user/persist', this.user);
-  
-        await this.getUser();
+      async registerUser() {
+        const response = await this.$api.post('/user/register', this.user);
+        this.resetUser();
       },
       
       async getAdress() {
@@ -446,4 +443,7 @@
     margin-bottom: 20px;
   }
 
-</style>
+</style>import {mask} from 'vue-the-mask'
+export default {
+  directives: {mask}
+}

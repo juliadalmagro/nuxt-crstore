@@ -123,6 +123,7 @@
                     <span>Nome de Usuário:</span>
                     <v-text-field
                     variant="outlined"
+                    v-model="user.username"
                     >
                     </v-text-field>
                   </v-col>
@@ -131,13 +132,15 @@
                   <v-col>
                     <span>Digite a sua senha:</span>
                     <v-text-field
+                    v-model="user.password"
                     variant="outlined"
                     :append-icon="show ? 'mdi-eye-off' : 'mdi-eye'"
                     :type="show ? 'text' : 'password'"
                     @click:append="tomaShow"
+                    @keyup.enter="pegaToken"
                     >
                     </v-text-field>
-                    <a href="" style="color: grey;">Esqueci minha senha</a>
+                    <!-- <a href="" style="color: grey;">Esqueci minha senha</a> -->
                   </v-col>
                 </v-row>
                 <v-row>
@@ -146,8 +149,9 @@
                     color="black"
                     class="text-none"
                     block
-                    border>
-                    <v-icon> mdi-lock-outline</v-icon>Entrar
+                    border
+                    @click="pegaToken()">
+                      Entrar
                     </v-btn>
                   </v-col>
                 </v-row>
@@ -198,22 +202,36 @@
     export default {
       data: () => {
         return {
-          items: [],
           show: true,
+          user: {
+            username: '',
+            password: '',
+          }
         }
       },
-      
-      async created() {
-        await this.getProdutos();
-      },
-    
       methods: {
-  
-        async getProdutos() {
-            const response = await this.$api.get('/product/blusas');
-            this.items = response.data;
-          },
-  
+        
+        // async login() {
+        //   const response = await this.$api.post('/user/login', this.user);
+        //   // this.resetUser();
+        // },
+
+        async pegaToken() {
+          if(this.user.username || this.user.password) {
+            try {
+              const response = await this.$api.post('/user/login', this.user);
+              if(response.token) {
+                localStorage.setItem('token', response.token);
+                this.$toast.success('Login efetuado com sucesso!');
+                this.mudaIndex(); 
+              }
+            } catch (error) {
+              console.error('Erro ao fazer login:', error);
+              this.$toast.error('Erro ao fazer login. Por favor, tente novamente.');
+            }
+          }
+        },
+        
         mudaIndex(){
           this.$router.push({ path: '/' });
         },

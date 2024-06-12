@@ -18,6 +18,14 @@ export default defineNuxtPlugin(() => {
     return Promise.reject(error);
   });
 
+  api.interceptors.request.use(function (teste) {
+    if (process.client) {
+      let key = window.localStorage.getItem('forget-key')
+      teste.headers.Authorization = `Bearer ${key}`
+    }
+    return teste
+  })
+
   return {
     provide: {
       api: api
